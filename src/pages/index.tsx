@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Song from '../components/Song'; // Make sure this component is expecting a prop of type Song
 import SearchBar from '../components/SearchBar';
+import SearchSongs from '@/app/search-song/SearchSongs';
 
 interface Song {
     id: string;
@@ -36,6 +37,8 @@ const Home: React.FC = () => {
     return (
         <div>
             <SearchBar onSearch={handleSearch} />
+            <SearchSongs />
+
             <div>
                 {['Rock', 'Pop', 'Jazz', 'Classic'].map(genre => (
                     <button key={genre} onClick={() => handleFilter(genre)}>
