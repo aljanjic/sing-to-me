@@ -13,7 +13,7 @@ const VoicesPage = ({
         <div>
             <h1> Search Songs Here: </h1>
             <SearchSongs />
-            <SongsList / query = {query}>
+            <SongsList  query = {query} />
         </div>
     )
 }
