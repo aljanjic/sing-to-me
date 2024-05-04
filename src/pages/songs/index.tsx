@@ -1,35 +1,27 @@
 // import Song from "@/components/Song";
 import clientPromise from "@/lib/mongodb";
-import axios from "axios";
 import { MongoClient, ObjectId } from "mongodb";
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
+import { getSongs } from "../api/songs";
 
 
-
-type Song = {
+export type Song = {
     _id: ObjectId,
     musician: string,
     songName: string,
     genres: string[],
-    file_name: string
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
 
-    const mongoClient = await clientPromise;
-
-    const data = await mongoClient
-        .db('sing-to-me')
-        .collection('songs')
-        .find()
-        .toArray()
+    const data = await getSongs();
 
     console.log('Data From MongoDB: ', data)
     
     return {
         props: {
-            songs:  JSON.parse(JSON.stringify(data)),
+            songs: data,
         },
         revalidate: 60,
     }
@@ -44,7 +36,6 @@ const Songs: NextPage = ({
             {songs.map((song: Song) => {
                 return (
                     <div key={song._id.toString()}>
-                    {/* <p>{song.file_name}</p> */}
                     <p>{song.musician}</p>
                     <p>{song.songName}</p>
                     <p>{song.genres.map((genre)=>{
