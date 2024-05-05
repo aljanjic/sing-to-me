@@ -6,7 +6,7 @@ import { getSongs } from "../api/songs";
 
 
 export type Song = {
-    _id: ObjectId,
+    _id?: ObjectId,
     musician: string,
     songName: string,
     genres: string[],
@@ -35,7 +35,7 @@ const Songs: NextPage = ({
             <h1> Songs: </h1>
             {songs.map((song: Song) => {
                 return (
-                    <div key={song._id.toString()}>
+                    <div key={song._id?.toString()}>
                     <p>{song.musician}</p>
                     <p>{song.songName}</p>
                     <p>{song.genres.map((genre)=>{
