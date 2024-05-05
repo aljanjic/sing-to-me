@@ -35,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse <Return | Object
             }
     
             const insertedId = await addSong(song)
+            res.revalidate('/songs')
             res.status(200).json(insertedId)
         } else {
             res.status(400).json({error: 'musician, songName and genres are required'})
