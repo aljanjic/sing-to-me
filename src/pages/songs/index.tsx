@@ -38,7 +38,7 @@ const Songs: NextPage = ({
                     <div key={song._id?.toString()}>
                     <p>{song.musician}</p>
                     <p>{song.songName}</p>
-                    <p>{song.genres.map((genre)=>{
+                    <p>{song.genres?.map((genre)=>{
                         return(`${genre} `)
                     })}</p>
                     </div>
