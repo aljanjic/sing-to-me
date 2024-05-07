@@ -4,6 +4,7 @@ import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import { getSongs } from "../api/songs";
 import {useQuery} from '@tanstack/react-query'
 import axios from "axios";
+import {Button} from "@mui/material";
 
 export type Song = {
     _id?: ObjectId,
@@ -39,6 +40,14 @@ const Songs: NextPage = ({
 
     return (
         <>  
+
+            {
+            ['Rock', 'Pop', 'Jazz', 'Classic','Yellow'].map(genre => {
+            return (<Button variant="contained" color="success">
+            {genre} 
+            </Button>)}
+            )
+            }
             <h1> Songs: </h1>
             {songs.map((song: Song) => {
                 return (
@@ -48,6 +57,7 @@ const Songs: NextPage = ({
                     <p>{song.genres?.map((genre)=>{
                         return(`${genre} `)
                     })}</p>
+                    {/* <Button  variant="contained" color="success"> B as button </Button> */}
                     </div>
                 )
             }) }
