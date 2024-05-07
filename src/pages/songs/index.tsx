@@ -4,7 +4,8 @@ import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import { getSongs } from "../api/songs";
 import {useQuery} from '@tanstack/react-query'
 import axios from "axios";
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
+import SongComponent from "@/components/SongComponent";
 
 export type Song = {
     _id?: ObjectId,
@@ -38,31 +39,31 @@ const Songs: NextPage = ({
         }
     );
 
+    if (songs){
     return (
-        <>  
+            <>  
 
-            {
-            ['Rock', 'Pop', 'Jazz', 'Classic','Yellow'].map(genre => {
-            return (<Button variant="contained" color="success">
-            {genre} 
-            </Button>)}
-            )
-            }
-            <h1> Songs: </h1>
-            {songs.map((song: Song) => {
-                return (
-                    <div key={song._id?.toString()}>
-                    <p>{song.musician}</p>
-                    <p>{song.songName}</p>
-                    <p>{song.genres?.map((genre)=>{
-                        return(`${genre} `)
-                    })}</p>
-                    {/* <Button  variant="contained" color="success"> B as button </Button> */}
-                    </div>
-                )
-            }) }
-        </>
-    )
+                {
+                    ['Rock', 'Pop', 'Jazz', 'Classic','Yellow'].map(genre => {
+                    return (
+                        <Button variant="contained" color="success">
+                        {genre} 
+                        </Button>
+                    )}
+                    )
+                }
+
+                <h1> Songs: </h1>
+                {songs.map((song: Song) => {
+                    
+                    return <SongComponent song={song} />
+                    
+                }) }
+            </>
+        )
+    } else 
+
+    return null;
 }
 
 export default Songs
