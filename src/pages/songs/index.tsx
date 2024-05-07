@@ -1,9 +1,9 @@
-// import Song from "@/components/Song";
 import clientPromise from "@/lib/mongodb";
 import { MongoClient, ObjectId } from "mongodb";
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import { getSongs } from "../api/songs";
-
+import {useQuery} from '@tanstack/react-query'
+import axios from "axios";
 
 export type Song = {
     _id?: ObjectId,
@@ -13,7 +13,6 @@ export type Song = {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-
 
     const data = await getSongs();
 
@@ -28,8 +27,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const Songs: NextPage = ({
-    songs,
+    songs: s,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    
+    const { data: {data: {songs = s } = {} } = {} } = useQuery(
+        ['songs'], 
+        () => {
+        return axios('api/songs') as any;
+        }
+    );
+
     return (
         <>  
             <h1> Songs: </h1>
