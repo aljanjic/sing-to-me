@@ -7,6 +7,7 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import SongComponent from "@/components/SongComponent";
 
+
 export type Song = {
     _id?: ObjectId,
     musician: string,
@@ -56,8 +57,13 @@ const Songs: NextPage = ({
                 <h1> Songs: </h1>
                 {songs.map((song: Song) => {
                     
-                    return <SongComponent song={song} />
-                    
+                    return (
+                        <div key={song._id?.toString()}>
+
+                        <SongComponent song={song} />
+                        
+                        </div>
+                    )
                 }) }
             </>
         )

@@ -12,7 +12,7 @@ interface SongProps {
 const Song: React.FC<SongProps> = ({ song }) => {
     return (
         <div>
-            <h3>{song.songName} - {song.musician}</h3>
+            <h3> {song.musician} - {song.songName}</h3>
             <p>{song.genres.join(', ')}</p>
         </div>
     );

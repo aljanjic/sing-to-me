@@ -44,12 +44,16 @@ export default async (
         const data = await getSongs();
         res.status(200).json({songs: data})
     } else if (req.method == 'POST') {
-        if(req.body.musician && req.body.songName && req.body.genres){
+        if(req.body.musician && req.body.songName && req.body.genre){
             const song: Song = {
                 musician: req.body.musician,
                 songName: req.body.songName,
-                genres: req.body.genres
+                genres: req.body.genre
             }
+
+            console.log('Req body:', req.body)
+
+            console.log('After API insert:', song)
     
             const insertedId = await addSong(song)
             res.revalidate('/songs')
