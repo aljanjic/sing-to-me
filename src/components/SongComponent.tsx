@@ -3,19 +3,15 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import Tooltip from '@mui/material/Tooltip';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import Paper from '@mui/material/Paper';
+
 
 
 const SongComponent = ({song} : {song: Song}) => {
     return (
-        <div key={song._id?.toString()}>
-            {/* <p>{song.musician}</p>
-            <p>{song.songName}</p>
-            <p>{song.genres?.map((genre)=>{
-                return(`${genre} `)
-            })}</p>
-            <br></br>
+       <div>
 
-            <p> VS </p> */}
+            <Paper elevation={3} style={{width: 350, padding:10, margin: 25}}>
             <h3>
             <span
                 style={{
@@ -30,11 +26,11 @@ const SongComponent = ({song} : {song: Song}) => {
             </Tooltip>
             </span>
             </h3>
-
             <p>{song.genres?.join(', ')}</p>
-
-            <br></br>
+            </Paper>
+        
         </div>
+
     )
 }
 

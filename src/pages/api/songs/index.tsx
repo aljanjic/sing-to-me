@@ -44,11 +44,11 @@ export default async (
         const data = await getSongs();
         res.status(200).json({songs: data})
     } else if (req.method == 'POST') {
-        if(req.body.musician && req.body.songName && req.body.genre){
+        if(req.body.musician && req.body.songName && req.body.genres){
             const song: Song = {
                 musician: req.body.musician,
                 songName: req.body.songName,
-                genres: req.body.genre
+                genres: req.body.genres
             }
 
             console.log('Req body:', req.body)

@@ -45,9 +45,9 @@ const Songs: NextPage = ({
             <>  
 
                 {
-                    ['Rock', 'Pop', 'Jazz', 'Classic','Yellow'].map(genre => {
+                    ['Rock', 'Pop', 'Jazz', 'Classic','Yellow'].map((genre : string, index : number) => {
                     return (
-                        <Button variant="contained" color="success">
+                        <Button variant="contained" color="success" key={index}>
                         {genre} 
                         </Button>
                     )}
@@ -55,16 +55,9 @@ const Songs: NextPage = ({
                 }
 
                 <h1> Songs: </h1>
-                {songs.map((song: Song) => {
-                    
-                    return (
-                        <div key={song._id?.toString()}>
-
-                        <SongComponent song={song} />
-                        
-                        </div>
-                    )
-                }) }
+                {songs.map((song: Song) => { 
+                    return <SongComponent song={song} key={song._id?.toString()} />
+                })}
             </>
         )
     } else 
