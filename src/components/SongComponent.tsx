@@ -4,14 +4,18 @@ import Tooltip from '@mui/material/Tooltip';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 
 
 const SongComponent = ({song} : {song: Song}) => {
     return (
-       <div>
+        <Grid item 
+        // style={{marginBottom: 15}}
+        >
 
-            <Paper elevation={3} style={{width: 350, padding:10, margin: 25}}>
+        {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
+            <Paper elevation={6} style={{width: 300, padding:10}}>
             <h3>
             <span
                 style={{
@@ -19,18 +23,17 @@ const SongComponent = ({song} : {song: Song}) => {
                     alignItems: 'center',
                     flexWrap: 'wrap'
                 }}
-            >
+                >
             {song.musician} - {song.songName} 
-            <Tooltip title={song._id?.toString()}>
-                <MusicNoteIcon fontSize='small' style={{marginLeft: 5}} />
-            </Tooltip>
+            {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </span>
             </h3>
             <p>{song.genres?.join(', ')}</p>
             </Paper>
         
-        </div>
+         {/* </Grid> */}
 
+        </Grid>
     )
 }
 

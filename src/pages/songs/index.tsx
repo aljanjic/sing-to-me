@@ -6,6 +6,9 @@ import {useQuery} from '@tanstack/react-query'
 import axios from "axios";
 import Button from "@mui/material/Button";
 import SongComponent from "@/components/SongComponent";
+import Grid from '@mui/material/Grid';
+import  Container  from '@mui/material/Container';
+
 
 
 export type Song = {
@@ -55,9 +58,13 @@ const Songs: NextPage = ({
                 }
 
                 <h1> Songs: </h1>
-                {songs.map((song: Song) => { 
-                    return <SongComponent song={song} key={song._id?.toString()} />
-                })}
+                <Container>
+                    <Grid container spacing={2} sx={{mt: 1}} alignItems="center" justifyContent="center">
+                        {songs.map((song: Song) => { 
+                            return <SongComponent song={song} key={song._id?.toString()} />
+                        })}
+                    </Grid>
+                </Container>
             </>
         )
     } else 
