@@ -1,4 +1,4 @@
-import {Song}from '@/pages/songs/index';
+import { Song } from '@/pages/songs/index';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import Tooltip from '@mui/material/Tooltip';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
