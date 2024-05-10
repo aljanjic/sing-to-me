@@ -14,7 +14,9 @@ export const getSongs = async(): Promise< Song[]> => {
     const data = await mongoClient
             .db('sing-to-me')
             .collection('songs')
-            .find().toArray() as Song[];
+            .find()
+            .sort({musician: 1, songName: 1})
+            .toArray() as Song[];
 
     return JSON.parse(JSON.stringify(data))
 }
