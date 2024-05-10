@@ -28,7 +28,7 @@ const SongComponent = ({song} : {song: Song}) => {
             {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </span>
             </h3>
-            <p>{song.genres?.join(', ')}</p>
+            <p>{song.genres?.slice(1).join(', ')}</p>
             </Paper>
         
          {/* </Grid> */}
