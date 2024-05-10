@@ -15,7 +15,7 @@ const SongComponent = ({song} : {song: Song}) => {
         >
 
         {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
-            <Paper elevation={6} style={{width: 300, padding:10}}>
+            <Paper elevation={3} style={{width: 300, padding:10}}>
             <h3>
             <span
                 style={{
