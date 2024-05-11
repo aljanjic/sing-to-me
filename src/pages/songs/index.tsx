@@ -41,10 +41,11 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
     return (
         <>
             <Container>
+            <h1>Muzički žanr:</h1>
+
                 <Grid container alignItems="center" justifyContent="center">
 
                     <Grid item>
-                <h1>Muzički žanr:</h1>
                         {['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ].map((genre: string, index: number) => {
                             return (
                                 <Button

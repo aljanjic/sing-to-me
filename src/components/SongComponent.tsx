@@ -11,11 +11,11 @@ import Grid from '@mui/material/Grid';
 const SongComponent = ({song} : {song: Song}) => {
     return (
         <Grid item 
-        // style={{marginBottom: 15}}
+        style={{marginBottom: '3px'}}
         >
 
         {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
-            <Paper elevation={3} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', }}> 
+            <Paper elevation={1} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', }}> 
             <h3 style={{
                     display: 'flex',
                     flexDirection: 'column', // Set direction of flex items to column
