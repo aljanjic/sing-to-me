@@ -15,7 +15,7 @@ const SongComponent = ({song} : {song: Song}) => {
         >
 
         {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
-            <Paper elevation={3} style={{width: 300, padding:10, backgroundColor:'#adc5b7'}}> 
+            <Paper elevation={3} style={{width: 300, padding:10, backgroundColor:'#adc5b7', }}> 
             <h3>
             <span
                 style={{
@@ -24,7 +24,9 @@ const SongComponent = ({song} : {song: Song}) => {
                     flexWrap: 'wrap'
                 }}
                 >
-            {song.musician} - {song.songName} 
+            <span style={{fontStyle: 'italic', marginRight: 2 }}> {song.musician}</span> 
+            <span> { ' - ' } </span>
+            <span style={{  marginLeft: 2}}> {song.songName} </span> 
             {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </span>
             </h3>

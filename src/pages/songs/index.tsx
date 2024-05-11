@@ -42,7 +42,9 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         <>
             <Container>
                 <Grid container alignItems="center" justifyContent="center">
+
                     <Grid item>
+                <h1>Muzički žanr:</h1>
                         {['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ].map((genre: string, index: number) => {
                             return (
                                 <Button
@@ -61,8 +63,9 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
             </Container>
 
             <Container>
-                <h1>{activeGenre} songs list:</h1>
+            <h1>{activeGenre} lista:</h1>
                 <Grid container spacing={0} sx={{ mt: 0 }} alignItems="center" justifyContent="center">
+
                     {songs.filter((song: Song) => activeGenre === 'All' || song.genres.includes(activeGenre)).map((song: Song) => {
                         return <SongComponent song={song} key={song._id?.toString()} />;
                     })}
