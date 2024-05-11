@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 const SongComponent = ({song} : {song: Song}) => {
     return (
         <Grid item 
-        style={{marginBottom: '3px'}}
+        style={{marginBottom: '2px'}}
         >
 
         {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
