@@ -15,7 +15,7 @@ const SongComponent = ({song} : {song: Song}) => {
         >
 
         {/* <Grid container direction="column" justifyContent="center" alignItems="center" > */}
-            <Paper elevation={1} style={{width: 300, padding:10}}>
+            <Paper elevation={3} style={{width: 300, padding:10, backgroundColor:'#adc5b7'}}> 
             <h3>
             <span
                 style={{
@@ -28,7 +28,7 @@ const SongComponent = ({song} : {song: Song}) => {
             {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </span>
             </h3>
-            <p>{song.genres?.slice(1).join(', ')}</p>
+            {/* <p>{song.genres?.slice(1).join(', ')}</p> */}
             </Paper>
         
          {/* </Grid> */}
