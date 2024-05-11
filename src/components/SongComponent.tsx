@@ -20,10 +20,11 @@ const SongComponent = ({song} : {song: Song}) => {
                     display: 'flex',
                     flexDirection: 'column', // Set direction of flex items to column
                     alignItems: 'center', // Center align items horizontally
-                    justifyContent: 'center' // Center align items vertically
+                    justifyContent: 'center', // Center align items vertically
+                    textAlign: 'center'
                 }}>
-            <span style={{fontStyle: 'italic', marginRight: 2 }}> {song.musician}</span> 
-            <span style={{  marginLeft: 2}}> {song.songName} </span> 
+            <span style={{fontStyle: 'italic', marginRight: 2, width: '85%' }}> {song.musician}</span> 
+            <span style={{  marginLeft: 2, width: '85%'}}> {song.songName} </span> 
             {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </h3>
             {/* <p>{song.genres?.slice(1).join(', ')}</p> */}
