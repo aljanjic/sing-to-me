@@ -26,6 +26,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 };
 
+const genres = ['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
+
 const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [activeGenre, setActiveGenre] = React.useState<string>('All');
 
@@ -42,11 +44,9 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         <>
             <Container>
             <h1>Muzički žanr:</h1>
-
                 <Grid container alignItems="center" justifyContent="center">
-
                     <Grid item>
-                        {['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ].map((genre: string, index: number) => {
+                        {genres.map((genre: string, index: number) => {
                             return (
                                 <Button
                                     style={{ margin: 5 }}

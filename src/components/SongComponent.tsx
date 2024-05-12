@@ -1,8 +1,4 @@
 import { Song } from '@/pages/songs/index';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import Tooltip from '@mui/material/Tooltip';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
@@ -25,7 +21,6 @@ const SongComponent = ({song} : {song: Song}) => {
                 }}>
             <span style={{fontStyle: 'italic', marginRight: 2, width: '85%' }}> {song.musician}</span> 
             <span style={{  marginLeft: 2, width: '85%'}}> {song.songName} </span> 
-            {/* <MusicNoteIcon fontSize='small' style={{marginLeft: 3}} /> */}
             </h3>
             {/* <p>{song.genres?.slice(1).join(', ')}</p> */}
             </Paper>
