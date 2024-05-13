@@ -36,11 +36,6 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
     const [activeGenre, setActiveGenre] = React.useState<string>('All');
     const [searchSong, setSearchSong] = React.useState<string>('');
 
-    const handleSearch = (searchTerm: string) => {
-        console.log('Search item: ', searchTerm)
-        setSearchSong(searchTerm)
-    };
-
     const { data: { data: { songs = s } = {} } = {} } = useQuery(
         ['songs'], 
         () => axios('api/songs').then(res => res.data)
@@ -50,33 +45,41 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         return 'Songs are loading..'; // Early return before rendering any JSX
     }
 
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newSearchTerm = event.target.value;
+        setSearchSong(newSearchTerm);
+    
+        // If the search term is deleted and becomes empty, reset genre filter to 'All'
+        if (newSearchTerm === '') {
+            setActiveGenre('All');
+        }
+    };
+
+    const filteredSongs = songs.filter((song: Song) => {
+        if (searchSong) {
+            return song.songName.toLowerCase().includes(searchSong.toLowerCase()) || song.musician.toLowerCase().includes(searchSong.toLowerCase());
+        }
+        return activeGenre === 'All' || song.genres.includes(activeGenre);
+    });
+
     return (
         <>
             <Container>
-
-
-
-
             {/* <h1>Muzički žanr:</h1> */}
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2}} >
                     <Grid item>
-                        <TextField fullWidth label="Trazi pjesmu" id="fullWidth"                                 onChange={(e) => {
-                                    handleSearch(e.target.value);
-                                }} />
-
-{/* 
-                            <label htmlFor="search" className="sr-only">
-                                Search    
-                            </label> 
-                            <input
-                                className="peer block w-1/2 rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                placeholder="search"
-                                onChange={(e) => {
-                                    handleSearch(e.target.value);
-                                }}
-                                /> */}
-                            {/* <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />  */}
+                        <TextField 
+                            fullWidth 
+                            label="Trazi pjesmu" 
+                            id="fullWidth"
+                            onChange={handleSearchChange}                                  
+                            // onChange={(e) => { handleSearch(e.target.value)}}
+                            variant="outlined"
+                            value={searchSong}
+                            style={{ margin: '20px 0' }} 
+                        />
                     </Grid>
+
                     <Grid item>
                         {genres.map((genre: string, index: number) => {
                             return (
@@ -96,12 +99,11 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
             </Container>
 
             <Container>
-            <h1>{activeGenre} lista:</h1>
-                <Grid container spacing={0} sx={{ mt: 0 }} alignItems="center" justifyContent="center">
-
-                    {songs.filter((song: Song) => activeGenre === 'All' || song.genres.includes(activeGenre)).filter((song: Song) => song.songName.toLowerCase().includes(searchSong.toLowerCase()) || song.musician.toLowerCase().includes(searchSong.toLowerCase() )).map((song: Song) => {
-                        return <SongComponent song={song} key={song._id?.toString()} />;
-                    })}
+                <h1>{searchSong ? `Results for "${searchSong}"` : `${activeGenre} Songs`}</h1>
+                <Grid container spacing={2} sx={{ mt: 1 }} alignItems="center" justifyContent="center">
+                    {filteredSongs.map((song: Song) => (
+                        <SongComponent song={song} key={song._id?.toString()} />
+                    ))}
                 </Grid>
             </Container>
         </>
