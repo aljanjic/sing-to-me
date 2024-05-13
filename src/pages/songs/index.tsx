@@ -14,9 +14,7 @@ import TextField from "@mui/material/TextField";
 export type Song = {
     _id?: ObjectId,
     musician: string,
-    musicianDia: string,
     songName: string,
-    songNameDia: string,
     genres: string[],
 }
 
@@ -31,11 +29,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 
-
-const genres = ['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
+// 'All',
+const genres = ['Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
 
 const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const [activeGenre, setActiveGenre] = React.useState<string>('All');
+    const [activeGenre, setActiveGenre] = React.useState<string>('Sve pesme');
     const [searchSong, setSearchSong] = React.useState<string>('');
 
     const { data: { data: { songs = s } = {} } = {} } = useQuery(
@@ -57,34 +55,26 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         }
     };
 
-    const filteredSongs = songs.filter((song) => {
-        if (searchSong) {
+    
+    const normalizeText = (text) => {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      };
 
-        // Check and safely access songName if it exists
-        const songNameMatch = song.songName && song.songName.toLowerCase().includes(searchSong.toLowerCase());
-    
-        // Check and safely access musician if it exists
-        const musicianMatch = song.musician && song.musician.toLowerCase().includes(searchSong.toLowerCase());
-    
-        // Check and safely access songNameDia if it exists
-        const songNameDiaMatch = song.songNameDia && song.songNameDia.toLowerCase().includes(searchSong.toLowerCase());
-    
-        // Check and safely access musicianDia if it exists
-        const musicianDiaMatch = song.musicianDia && song.musicianDia.toLowerCase().includes(searchSong.toLowerCase());
-    
-        // Return true if any of the above checks match
-        return songNameMatch || musicianMatch || songNameDiaMatch || musicianDiaMatch; 
-    }
-    return activeGenre === 'All' || song.genres?.includes(activeGenre);
+    const filteredSongs = songs.filter((song: Song) => {
+
+        const searchNormalized = normalizeText(searchSong);
+        if (searchNormalized) {
+            return normalizeText(song.songName.toLowerCase())?.includes(searchNormalized.toLowerCase()) || normalizeText(song.musician.toLowerCase())?.includes(searchNormalized.toLowerCase());
+        }
+        return activeGenre === 'All' || song.genres?.includes(activeGenre);
     });
-
 
     return (
         <>
             <Container>
             {/* <h1>Muzički žanr:</h1> */}
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2}} >
-                    <Grid item>
+                    <Grid item xs={12} style={{ width: '75%' }}>
                         <TextField 
                             fullWidth 
                             label="Traži pesmu" 
@@ -97,7 +87,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
                         />
                     </Grid>
 
-                    <Grid item>
+                    <Grid item xs={12} style={{ width: '75%' }}>
                         {genres.map((genre: string, index: number) => {
                             return (
                                 <Button
