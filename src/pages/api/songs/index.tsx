@@ -53,10 +53,6 @@ export default async (
                 genres: req.body.genres
             }
 
-            console.log('Req body:', req.body)
-
-            console.log('After API insert:', song)
-    
             const insertedId = await addSong(song)
             res.revalidate('/songs')
             res.status(200).json(insertedId)

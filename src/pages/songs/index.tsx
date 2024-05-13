@@ -29,11 +29,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 
-
-const genres = ['All','Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
+// 'All',
+const genres = ['Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
 
 const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const [activeGenre, setActiveGenre] = React.useState<string>('All');
+    const [activeGenre, setActiveGenre] = React.useState<string>('Sve pesme');
     const [searchSong, setSearchSong] = React.useState<string>('');
 
     const { data: { data: { songs = s } = {} } = {} } = useQuery(
@@ -51,15 +51,22 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
     
         // If the search term is deleted and becomes empty, reset genre filter to 'All'
         if (newSearchTerm === '') {
-            setActiveGenre('All');
+            setActiveGenre('Sve pesme');
         }
     };
 
+    
+    const normalizeText = (text) => {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      };
+
     const filteredSongs = songs.filter((song: Song) => {
-        if (searchSong) {
-            return song.songName.toLowerCase().includes(searchSong.toLowerCase()) || song.musician.toLowerCase().includes(searchSong.toLowerCase());
+
+        const searchNormalized = normalizeText(searchSong);
+        if (searchNormalized) {
+            return normalizeText(song.songName.toLowerCase())?.includes(searchNormalized.toLowerCase()) || normalizeText(song.musician.toLowerCase())?.includes(searchNormalized.toLowerCase());
         }
-        return activeGenre === 'All' || song.genres.includes(activeGenre);
+        return activeGenre === 'All' || song.genres?.includes(activeGenre);
     });
 
     return (
@@ -67,20 +74,20 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
             <Container>
             {/* <h1>Muzički žanr:</h1> */}
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2}} >
-                    <Grid item>
+                    <Grid item xs={12} style={{}}>
                         <TextField 
                             fullWidth 
-                            label="Trazi pjesmu" 
+                            label="Traži pesmu" 
                             id="fullWidth"
                             onChange={handleSearchChange}                                  
                             // onChange={(e) => { handleSearch(e.target.value)}}
                             variant="outlined"
                             value={searchSong}
-                            style={{ margin: '20px 0' }} 
+                            style={{ margin: '20px 0',  }} 
                         />
                     </Grid>
 
-                    <Grid item>
+                    <Grid item xs={12} style={{ width: '75%' }}>
                         {genres.map((genre: string, index: number) => {
                             return (
                                 <Button
