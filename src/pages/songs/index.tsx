@@ -51,7 +51,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
     
         // If the search term is deleted and becomes empty, reset genre filter to 'All'
         if (newSearchTerm === '') {
-            setActiveGenre('All');
+            setActiveGenre('Sve pesme');
         }
     };
 
@@ -74,7 +74,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
             <Container>
             {/* <h1>Muzički žanr:</h1> */}
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2}} >
-                    <Grid item xs={12} style={{ width: '75%' }}>
+                    <Grid item xs={12} style={{}}>
                         <TextField 
                             fullWidth 
                             label="Traži pesmu" 
@@ -83,7 +83,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
                             // onChange={(e) => { handleSearch(e.target.value)}}
                             variant="outlined"
                             value={searchSong}
-                            style={{ margin: '20px 0' }} 
+                            style={{ margin: '20px 0',  }} 
                         />
                     </Grid>
 
