@@ -49,7 +49,9 @@ export default async (
         if(req.body.musician && req.body.songName && req.body.genres){
             const song: Song = {
                 musician: req.body.musician,
+                musicianDia: req.body.musicianDia,
                 songName: req.body.songName,
+                songNameDia: req.body.songNameDia,
                 genres: req.body.genres
             }
 

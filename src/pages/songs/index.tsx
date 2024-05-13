@@ -14,7 +14,9 @@ import TextField from "@mui/material/TextField";
 export type Song = {
     _id?: ObjectId,
     musician: string,
+    musicianDia: string,
     songName: string,
+    songNameDia: string,
     genres: string[],
 }
 
@@ -55,12 +57,27 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         }
     };
 
-    const filteredSongs = songs.filter((song: Song) => {
+    const filteredSongs = songs.filter((song) => {
         if (searchSong) {
-            return song.songName.toLowerCase().includes(searchSong.toLowerCase()) || song.musician.toLowerCase().includes(searchSong.toLowerCase());
-        }
-        return activeGenre === 'All' || song.genres.includes(activeGenre);
+
+        // Check and safely access songName if it exists
+        const songNameMatch = song.songName && song.songName.toLowerCase().includes(searchSong.toLowerCase());
+    
+        // Check and safely access musician if it exists
+        const musicianMatch = song.musician && song.musician.toLowerCase().includes(searchSong.toLowerCase());
+    
+        // Check and safely access songNameDia if it exists
+        const songNameDiaMatch = song.songNameDia && song.songNameDia.toLowerCase().includes(searchSong.toLowerCase());
+    
+        // Check and safely access musicianDia if it exists
+        const musicianDiaMatch = song.musicianDia && song.musicianDia.toLowerCase().includes(searchSong.toLowerCase());
+    
+        // Return true if any of the above checks match
+        return songNameMatch || musicianMatch || songNameDiaMatch || musicianDiaMatch; 
+    }
+    return activeGenre === 'All' || song.genres?.includes(activeGenre);
     });
+
 
     return (
         <>
@@ -70,7 +87,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
                     <Grid item>
                         <TextField 
                             fullWidth 
-                            label="Trazi pjesmu" 
+                            label="Traži pesmu" 
                             id="fullWidth"
                             onChange={handleSearchChange}                                  
                             // onChange={(e) => { handleSearch(e.target.value)}}
