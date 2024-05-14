@@ -55,6 +55,11 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         }
     };
 
+    const handleGenreChange = (genre) => {
+        setActiveGenre(genre)
+        setSearchSong('')
+    }
+
     
     const normalizeText = (text) => {
         return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -95,7 +100,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
                                     variant={activeGenre.toLowerCase() === genre.toLowerCase() ? "contained" : "outlined"}
                                     color={activeGenre.toLowerCase() === genre.toLowerCase() ? "success" : "primary"}
                                     key={index}
-                                    onClick={() => setActiveGenre(genre)}
+                                    onClick={() => handleGenreChange(genre)}
                                 >
                                     {genre}
                                 </Button>
