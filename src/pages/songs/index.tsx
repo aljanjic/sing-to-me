@@ -112,7 +112,7 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
 
             <Container>
                 <h1>{searchSong ? `Rezultati za "${searchSong}"` : `${activeGenre} lista`}</h1>
-                <Grid container spacing={2} sx={{ mt: 1 }} alignItems="center" justifyContent="center">
+                <Grid container spacing={0} sx={{ mt: 1 }} alignItems="center" justifyContent="center">
                     {filteredSongs.map((song: Song) => (
                         <SongComponent song={song} key={song._id?.toString()} />
                     ))}
