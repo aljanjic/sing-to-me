@@ -19,13 +19,23 @@ export type Song = {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const data = await getSongs();
-    return {
-        props: {
-            songs: data,
-        },
-        revalidate: 60,
-    };
+    try {
+        const data = await getSongs();
+        return {
+            props: {
+                songs: data,
+            },
+            revalidate: 60,
+        };
+    } catch (error) {
+        console.error('Failed to fetch songs:', error);
+        return {
+            props: {
+                songs: [],  
+            },
+            revalidate: 60,
+        };
+    }
 };
 
 
