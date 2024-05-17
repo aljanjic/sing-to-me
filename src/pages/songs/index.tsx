@@ -42,14 +42,13 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
     );
 
     if (!songs) {
-        return 'Songs are loading..'; // Early return before rendering any JSX
+        return 'Songs are loading..'; 
     }
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newSearchTerm = event.target.value;
         setSearchSong(newSearchTerm);
     
-        // If the search term is deleted and becomes empty, reset genre filter to 'All'
         if (newSearchTerm === '') {
             setActiveGenre('Sve pesme');
         }
