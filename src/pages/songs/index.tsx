@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 
 // 'All',
-const genres = ['Sve pesme',  'Domace',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
+const genres = ['Sve pesme',  'Domaće',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
 
 const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [activeGenre, setActiveGenre] = React.useState<string>('Sve pesme');
@@ -65,13 +65,17 @@ const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticP
         return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
       };
 
-    const filteredSongs = songs.filter((song: Song) => {
-
+      const filteredSongs = songs.filter((song: Song) => {
         const searchNormalized = normalizeText(searchSong);
         if (searchNormalized) {
-            return normalizeText(song.songName.toLowerCase())?.includes(searchNormalized.toLowerCase()) || normalizeText(song.musician.toLowerCase())?.includes(searchNormalized.toLowerCase());
+            const songNameMatch = song.songName && typeof song.songName === 'string' &&
+                normalizeText(song.songName.toLowerCase()).includes(searchNormalized);
+            const musicianMatch = song.musician && typeof song.musician === 'string' &&
+                normalizeText(song.musician.toLowerCase()).includes(searchNormalized);
+    
+            return songNameMatch || musicianMatch;
         }
-        return activeGenre === 'All' || song.genres?.includes(activeGenre);
+        return activeGenre === 'All' || (song.genres && song.genres.includes(activeGenre));
     });
 
     return (
