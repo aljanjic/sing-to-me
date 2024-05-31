@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 
 // 'All',
-const genres = ['Sve pesme',  'Domaće',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Ballad', 'Pop' ];
+const genres = ['Sve pesme',  'Domaće',  'Strane',  'Zabavna', 'Narodna', 'Rock', 'EX-YU', 'Balade', 'Pop' ];
 
 const Songs: NextPage = ({ songs: s }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [activeGenre, setActiveGenre] = React.useState<string>('Sve pesme');
