@@ -10,13 +10,14 @@ const SongComponent = ({song} : {song: Song}) => {
         style={{marginBottom: '2px'}}
         >
 
-            <Paper elevation={1} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', }}> 
+            <Paper elevation={1} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', minHeight: 105.933}}> 
             <h3 style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center', 
                     justifyContent: 'center', 
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    paddingTop: 10,
                 }}>
             <span style={{fontStyle: 'italic', marginRight: 2, width: '85%' }}> {song.musician}</span> 
             <span style={{  marginLeft: 2, width: '85%'}}> {song.songName} </span> 
