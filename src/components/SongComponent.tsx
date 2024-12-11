@@ -10,7 +10,7 @@ const SongComponent = ({song} : {song: Song}) => {
         style={{marginBottom: '2px'}}
         >
 
-            <Paper elevation={1} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', minHeight: 120}}> 
+            <Paper elevation={1} style={{width: 300, padding: 1, backgroundColor:'#adc5b7', minHeight: 130}}> 
             <h3 style={{
                     display: 'flex',
                     flexDirection: 'column',
